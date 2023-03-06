@@ -1,27 +1,17 @@
 import chalk from 'chalk';
 import cors from 'cors';
 import express, { json } from 'express';
+import authRouter from './routers/users-router';
 
 const app = express();
 
 app.use(cors());
 app.use(json());
 
-const usuarios = [];
+
 const tweets = [];
 
-app.post('/sign-up', (req, res) => {
-  const { username, avatar } = req.body;
-
-  if (!username || !avatar) {
-    res.status(400).send('Todos os campos são obrigatórios!');
-    return;
-  }
-
-  usuarios.push({ username, avatar });
-
-  res.status(200).send('OK deu tudo certo');
-});
+app.use(authRouter);
 
 app.post('/tweets', (req, res) => {
   const { tweet, username } = req.body;
