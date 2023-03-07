@@ -4,7 +4,7 @@ class TweetsController {
 	constructor() {
 		this.tweetsList = [];
 		this.postTweet = this.postTweet.bind(this);
-		// this.getTweets = this.getTweets.bind(this);
+		this.getTweets = this.getTweets.bind(this);
 		// this.getUserTweets = this.getUserTweets.bind(this);
 		// this.reverseTweets = this.reverseTweets.bind(this);
 	}
@@ -23,17 +23,31 @@ class TweetsController {
 		res.status(201).send("OK, seu tweet foi criado");
 	}
 
-	// getTweets(req,res) {
+	getTweets(req,res) {
+	  const { page } = req.query;
 
-	// }
+	  if (page && page < 1) {
+	    res.status(400).send("Informe uma página válida!");
+	    return;
+	  }
+	  const limite = 10;
+	  const start = (page - 1) * limite;
+	  const end = page * limite;
+
+	  if (this.tweetsList.length <= 10) {
+	    return res.send(this.reverseTweets());
+	  }
+
+	  return res.status(200).send(this.reverseTweets().slice(start, end));
+	}
 
 	// getUserTweets(req,res){
 
 	// }
 
-	// reverseTweets(req,res){
-
-	// }
+	reverseTweets() {
+		return [...this.tweetsList].reverse();
+	}
 }
 
 // app.get("/tweets/:username", (req, res) => {
@@ -43,27 +57,5 @@ class TweetsController {
 
 // 	res.status(200).send(tweetsDoUsuario);
 // });
-
-// app.get("/tweets", (req, res) => {
-// 	const { page } = req.query;
-
-// 	if (page && page < 1) {
-// 		res.status(400).send("Informe uma página válida!");
-// 		return;
-// 	}
-// 	const limite = 10;
-// 	const start = (page - 1) * limite;
-// 	const end = page * limite;
-
-// 	if (tweets.length <= 10) {
-// 		return res.send(reverseTweets());
-// 	}
-
-// 	res.status(200).send([...tweets].reverse().slice(start, end));
-// });
-
-// function reverseTweets() {
-// 	return [...tweets].reverse();
-// }
 
 export default new TweetsController();
