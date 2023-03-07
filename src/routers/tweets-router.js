@@ -1,5 +1,5 @@
 import express from "express";
-import tweetsController from "../controllers/tweets-controller.js";
+import tweetsController from "../useCases/tweets-controller";
 
 const tweetsRouter = express.Router();
 

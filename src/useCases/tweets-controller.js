@@ -1,4 +1,4 @@
-import usersController from "./users-controller.js";
+import usersController from "./Users/createUser/createUserController.js";
 
 class TweetsController {
 	constructor() {
@@ -43,7 +43,9 @@ class TweetsController {
 	getUserTweets(req, res) {
 		const { username } = req.params;
 
-		const tweetsDoUsuario = this.tweetsList.filter((t) => t.username === username);
+		const tweetsDoUsuario = this.tweetsList.filter(
+			(t) => t.username === username
+		);
 
 		res.status(200).send(tweetsDoUsuario);
 	}
