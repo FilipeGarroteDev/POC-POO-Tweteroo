@@ -1,4 +1,4 @@
-import usersController from "./Users/createUser/createUserController.js";
+import usersController from "../Users/createUser/createUserController.js";
 
 class TweetsController {
 	constructor() {
