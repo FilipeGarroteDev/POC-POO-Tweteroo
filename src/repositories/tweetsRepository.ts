@@ -28,6 +28,10 @@ export class TweetsRepository {
 		return this.reverseTweets().slice(start, end);
 	}
 
+	getUserTweets(username: string) {
+		return this.tweets.filter((t) => t.username === username);
+	}
+
 	reverseTweets() {
 		return [...this.tweets].reverse();
 	}
