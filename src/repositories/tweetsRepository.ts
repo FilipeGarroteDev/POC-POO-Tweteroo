@@ -20,4 +20,15 @@ export class TweetsRepository {
 		const newTweet = new Tweet(username, avatar, tweet);
 		this.tweets.push(newTweet);
 	}
+
+	getAllTweets(start: number, end: number): Tweet[] {
+		if (this.tweets.length <= 10) {
+			return this.reverseTweets();
+		}
+		return this.reverseTweets().slice(start, end);
+	}
+
+	reverseTweets() {
+		return [...this.tweets].reverse();
+	}
 }
