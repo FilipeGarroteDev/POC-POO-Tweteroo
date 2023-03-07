@@ -2,7 +2,6 @@ class AuthController {
 	constructor() {
 		this.usuarios = [];
 		this.signin = this.signin.bind(this);
-		this.getLoggedUser = this.getLoggedUser.bind(this);
 	}
 
 	signin(req, res) {
